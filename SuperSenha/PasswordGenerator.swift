@@ -50,7 +50,7 @@ class PasswordGenerator {
                 universe += specialCharacters
             }
             
-            if useCapitalLetters {
+            if useCapitalLetters && useLetters {
                 universe += letters.uppercased()
             }
             

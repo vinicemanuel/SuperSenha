@@ -29,11 +29,16 @@ class ViewController: UIViewController {
     }
     
     @IBAction func generate() {
-        let alert = UIAlertController()
         if !self.checkPassworkdCount() {
-            
+            let alert = UIAlertController(title: "Erro", message: "Quantidade de senhas: zero ou maior que 99", preferredStyle: .alert)
+            let alertButton = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alert.addAction(alertButton)
+            self.present(alert, animated: true, completion: nil)
         } else if !self.checkPassworkdSize() {
-            
+            let alert = UIAlertController(title: "Erro", message: "Total de caracteres: zero ou maior que 16", preferredStyle: .alert)
+            let alertButton = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alert.addAction(alertButton)
+            self.present(alert, animated: true, completion: nil)
         } else {
             self.performSegue(withIdentifier: segueID, sender: nil)
         }
@@ -68,11 +73,13 @@ class ViewController: UIViewController {
     }
     
     private func checkPassworkdSize() -> Bool {
-        return false
+        guard let size = Int(self.tfNumberOfCharacters.text ?? "") else { return false }
+        return size < 16 && size > 0
     }
     
     private func checkPassworkdCount() -> Bool {
-        return false
+        guard let count = Int(self.tfNumberOfCharacters.text ?? "") else { return false }
+        return count < 99 && count > 0
     }
     
     private func checkSwitchs() {
